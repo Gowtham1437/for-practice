@@ -4,11 +4,7 @@ pipeline{
             label 'forpractice'
         }
     }
-script{
-  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
-    sh sh 'docker login -u ${user} -p ${passwd}'
-  }
-}
+
     stages{
         stage ('checkout') {
             steps{
@@ -20,7 +16,11 @@ script{
                 sh 'mvn clean package'
             }
         } 
-
+    script{
+  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
+    sh sh 'docker login -u ${user} -p ${passwd}'
+  }
+}
         stage ('docker build'){
             steps{
                 sh 'docker build . -t bobby4me/mynginx:v1'
