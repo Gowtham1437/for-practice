@@ -1,0 +1,38 @@
+pipeline{
+    agent{
+        node{
+            label 'forpractice'
+        }
+    }
+script{
+  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
+    sh sh 'docker login -u ${user} -p ${passwd}'
+  }
+}
+    stages{
+        stage ('checkout') {
+            steps{
+                git changelog: false, poll: false, url: 'https://github.com/Gowtham1437/for-practice.git'
+            }
+        }    
+        stage ('maven build') {
+            steps{
+                sh 'mvn clean package'
+            }
+        } 
+
+        stage ('docker build'){
+            steps{
+                sh 'docker login -u bobby4me -p dckr_pat_k7bMm6utohbyx2UjjIHojjfqtl8'
+                sh 'docker build . -t bobby4me/mynginx:v1'
+                sh 'docker push bobby4me/mynginx:v1'
+            }
+        }
+        stage ('docker run'){
+            steps{
+                sh 'docker run -d -p 3233:8080 -p 50001:50000 bobby4me/mynginx:v1'
+            }
+        }
+
+    }
+}
