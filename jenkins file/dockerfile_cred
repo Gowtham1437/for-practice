@@ -16,13 +16,14 @@ pipeline{
                 sh 'mvn clean package'
             }
         } 
-    script {
-  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
-    sh sh 'docker login -u ${user} -p ${passwd}'
-  }
-}
+   
         stage ('docker build'){
             steps{
+     script {
+  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
+      sh 'docker login -u ${user} -p ${passwd}'
+  }
+}
                 sh 'docker build . -t bobby4me/mynginx:v1'
                 sh 'docker push bobby4me/mynginx:v1'
             }
