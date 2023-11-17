@@ -23,7 +23,6 @@ script{
 
         stage ('docker build'){
             steps{
-                sh 'docker login -u bobby4me -p dckr_pat_k7bMm6utohbyx2UjjIHojjfqtl8'
                 sh 'docker build . -t bobby4me/mynginx:v1'
                 sh 'docker push bobby4me/mynginx:v1'
             }
