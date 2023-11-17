@@ -26,7 +26,7 @@ pipeline{
         }
         stage ('docker run'){
             steps{
-                sh 'docker run -d -p 3232:8080 -p 50001:50001 bobby4me/mynginx:v1'
+                sh 'docker run -d -p 3233:8080 -p 50001:50000 bobby4me/mynginx:v1'
             }
         }
 
