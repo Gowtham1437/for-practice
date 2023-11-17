@@ -16,7 +16,7 @@ pipeline{
                 sh 'mvn clean package'
             }
         } 
-    script{
+    script {
   withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'passwd', usernameVariable: 'user')]) {
     sh sh 'docker login -u ${user} -p ${passwd}'
   }
