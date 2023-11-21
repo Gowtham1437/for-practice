@@ -24,11 +24,6 @@ pipeline{
                 sh 'docker push bobby4me/mynginx:v1'
             }
         }
-        stage ('docker run'){
-            steps{
-                sh 'docker run -d -p 3233:8080 -p 50001:50000 bobby4me/mynginx:v1'
-            }
-        }
     stage ('menifest checkout') {
             steps{
                 git changelog: false, poll: false, url: 'https://github.com/Gowtham1437/aws-k8s-cicd.git'
