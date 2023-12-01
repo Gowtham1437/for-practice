@@ -53,7 +53,7 @@ pipeline{
                     sh 'kubectl --server=https://FB0DCC44A76F6CE38FD05DD63E03A0FD.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify --token="${k8s_token)" apply -f service.yml'
                     
                     sh 'kubectl --server=https://FB0DCC44A76F6CE38FD05DD63E03A0FD.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify --token="${k8s_token)" rollout restart deployment/java-app-deployment'
-                    
+                   } 
                     echo "kubernetes deployment is done"
 
                     sh 'kubectl get deployments'
