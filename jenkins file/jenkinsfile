@@ -27,7 +27,7 @@ pipeline{
         }
     stage ('menifest checkout') {
             steps{
-                git 'https://github.com/Gowtham1437/aws-k8s-cicd.git'
+                git changelog: false, poll: false, url: 'https://github.com/Gowtham1437/aws-k8s-cicd.git'
             }
         }   
     stage ('k8s cicd') {
