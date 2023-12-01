@@ -59,7 +59,8 @@ pipeline{
 
                     sh 'kubectl get deployments'
                     sh 'kubectl get services'
-                
+
+               } 
             }
         }
     }
